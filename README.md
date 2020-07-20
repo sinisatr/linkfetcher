@@ -44,6 +44,26 @@ LinkFetcher.fetch("https://elixir-lang.org/")
  }}
 ```
 
+## Implementing as dependency
+```
+# add dependency in mix.exs
+  defp deps do
+    [
+      {:link_fetcher, git: "https://github.com/sinisatr/linkfetcher"}
+    ]
+  end
+Follow other instructions like `Running from CLI`
+```
+
+### Used dependencies
+```
+defp deps do
+  [
+    {:httpoison, "~> 1.6"},
+    {:floki, "~> 0.27.0"}
+  ]
+end
+```
 ### Assumptions
 Return :error when url not sent
 Don't consider "#", "javascript.view...", "/images/storage..." as URLS

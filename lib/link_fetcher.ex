@@ -5,8 +5,8 @@ defmodule LinkFetcher do
 
   require Logger
 
-  @max_redirect Application.get_env(:link_fetcher, :max_redirect)
-  @proxy Application.get_env(:link_fetcher, :proxy)
+  @max_redirect Application.get_env(:link_fetcher, :max_redirect) || 5
+  @proxy Application.get_env(:link_fetcher, :proxy) || %{use: false}
 
   @typedoc "valid url"
   @type url :: binary
