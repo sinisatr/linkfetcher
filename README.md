@@ -2,13 +2,13 @@
 
 LinkFetcher is exercise lib created to return links and assets for given URL
 
-There is a function `​fetch(url)​` that fetches the page corresponding to the url and returns an object that has the following attributes:
-● Assets - a collection of urls present in the img tags on the page
+There is a function `​fetch(url)​` that fetches the page corresponding to the url and returns an object that has the following attributes:\
+● Assets - a collection of urls present in the img tags on the page\
 ● Links - a collection of urls present in the anchor tags on the page
 
 ## Be sure to have
 
-Erlang/OTP - 23
+Erlang/OTP - 23\
 Elixir - 1.10.4
 
 ## Running from CLI
@@ -52,7 +52,7 @@ LinkFetcher.fetch("https://elixir-lang.org/")
       {:link_fetcher, git: "https://github.com/sinisatr/linkfetcher"}
     ]
   end
-Follow other instructions like `Running from CLI`
+# Follow other instructions like `Running from CLI`
 ```
 
 ### Used dependencies
@@ -65,9 +65,9 @@ defp deps do
 end
 ```
 ### Assumptions
-Return :error when url not sent
-Don't consider "#", "javascript.view...", "/images/storage..." as URLS
-Create tests
-Find good location for given urls like "www.youtube.com", "www.facebook.com"
-Maximum 5 redirections per request
+Return :error when url not sent \
+Don't consider "#", "javascript.view...", "/images/storage..." as URLS\
+Create tests\
+Find good location for given urls like "www.youtube.com", "https://www.facebook.com/" \
+Maximum 5 redirections per request\
 Return `{:ok, map}` where map has keys - `:links` and `:assets`

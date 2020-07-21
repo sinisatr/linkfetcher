@@ -1,0 +1,5 @@
+
+/_build
+/deps
+.DS_Store
+config/dev.*.exs

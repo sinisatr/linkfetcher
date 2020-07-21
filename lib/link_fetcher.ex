@@ -47,7 +47,7 @@ defmodule LinkFetcher do
             get(url, redirection_counter + 1)
 
           _ ->
-            Logger.error("Can't get location from response header for given URL: #{inspect(url)}")
+            Logger.warn("Can't get location from response header for given URL: #{inspect(url)}")
             {:error, :no_location_header}
         end
 
@@ -56,11 +56,11 @@ defmodule LinkFetcher do
         {:ok, fetch_data(body)}
 
       {:ok, %HTTPoison.Response{status_code: code}} ->
-        Logger.error("Response after GET request is status code: #{inspect(code)}")
+        Logger.warn("Response after GET request is status code: #{inspect(code)}")
         {:error, code}
 
       {:error, %HTTPoison.Error{id: _, reason: res}} ->
-        Logger.error("Error after GET request. Reason: #{inspect(res)}")
+        Logger.warn("Error after GET request. Reason: #{inspect(res)}")
         {:error, res}
     end
   end
@@ -68,19 +68,17 @@ defmodule LinkFetcher do
   defp fetch_data(body) do
     {:ok, html} = Floki.parse_document(body)
 
-    links =
-      html
-      |> Floki.find("a")
-      |> Floki.attribute("href")
-      |> filter_urls()
-
-    assets =
-      html
-      |> Floki.find("img")
-      |> Floki.attribute("src")
-      |> filter_urls()
+    links = find(html, "a", "href")
+    assets = find(html, "img", "src")
 
     %{assets: assets, links: links}
+  end
+
+  defp find(html, tag, attribute) do
+    html
+    |> Floki.find(tag)
+    |> Floki.attribute(attribute)
+    |> filter_urls()
   end
 
   # get routed location
